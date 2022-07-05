@@ -228,7 +228,7 @@
                             <constraint firstItem="UKj-lX-GdW" firstAttribute="top" secondItem="Ocv-dr-WMp" secondAttribute="top" id="6a6-4d-G2I"/>
                             <constraint firstItem="UKj-lX-GdW" firstAttribute="leading" secondItem="Ocv-dr-WMp" secondAttribute="leading" id="Iac-5G-zA1"/>
                             <constraint firstItem="Ocv-dr-WMp" firstAttribute="trailing" secondItem="UKj-lX-GdW" secondAttribute="trailing" id="vhk-PH-wVe"/>
-                            <constraint firstAttribute="bottom" secondItem="UKj-lX-GdW" secondAttribute="bottom" id="y9x-rd-L7M"/>
+                            <constraint firstItem="Ocv-dr-WMp" firstAttribute="bottom" secondItem="UKj-lX-GdW" secondAttribute="bottom" constant="-34" id="y9x-rd-L7M"/>
                         </constraints>
                     </view>
                 </viewController>
