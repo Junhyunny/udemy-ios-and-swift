@@ -14,21 +14,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var secondDice: UIImageView!
     @IBOutlet weak var thirdDice: UIImageView!
     
+    let dices = [
+        UIImage(imageLiteralResourceName: "DiceOne"),
+        UIImage(imageLiteralResourceName: "DiceTwo"),
+        UIImage(imageLiteralResourceName: "DiceThree"),
+        UIImage(imageLiteralResourceName: "DiceFour"),
+        UIImage(imageLiteralResourceName: "DiceFive"),
+        UIImage(imageLiteralResourceName: "DiceSix")
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        firstDice.image = UIImage(imageLiteralResourceName: "DiceOne")
-        secondDice.image = UIImage(imageLiteralResourceName: "DiceTwo")
-        thirdDice.image = UIImage(imageLiteralResourceName: "DiceThree")
-        
     }
     
     @IBAction func rollButtonPressed(_ sender: Any) {
-        print("Hello World")
-        
-        firstDice.image = UIImage(imageLiteralResourceName: getRandomDice(Int.random(in: 1...6)))
-        secondDice.image = UIImage(imageLiteralResourceName: getRandomDice(Int.random(in: 1...6)))
-        thirdDice.image = UIImage(imageLiteralResourceName: getRandomDice(Int.random(in: 1...6)))
+        //        firstDice.image = UIImage(imageLiteralResourceName: getRandomDice(Int.random(in: 1...6)))
+        //        secondDice.image = UIImage(imageLiteralResourceName: getRandomDice(Int.random(in: 1...6)))
+        //        thirdDice.image = UIImage(imageLiteralResourceName: getRandomDice(Int.random(in: 1...6)))
+        firstDice.image = dices.randomElement() // same as under method
+        secondDice.image = dices[Int.random(in: 0...5)]
+        thirdDice.image = dices[Int.random(in: 0...5)]
     }
     
     func getRandomDice(_ number: Int) -> String {
@@ -51,5 +56,4 @@ class ViewController: UIViewController {
         }
         return result
     }
-    
 }
