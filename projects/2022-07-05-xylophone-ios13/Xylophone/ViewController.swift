@@ -17,45 +17,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func cKeyPressed(_ sender: UIButton) {
-        let url = Bundle.main.url(forResource: "C", withExtension: "wav")
+    func soundAudio(_ resourceName: String) {
+        let url = Bundle.main.url(forResource: resourceName, withExtension: "wav")
         player = try! AVAudioPlayer(contentsOf: url!)
         player?.play()
     }
     
-    @IBAction func dKeyPressed(_ sender: UIButton) {
-        let url = Bundle.main.url(forResource: "D", withExtension: "wav")
-        player = try! AVAudioPlayer(contentsOf: url!)
-        player?.play()
-    }
-    
-    @IBAction func eKeyPressed(_ sender: UIButton) {
-        let url = Bundle.main.url(forResource: "E", withExtension: "wav")
-        player = try! AVAudioPlayer(contentsOf: url!)
-        player?.play()
-    }
-    
-    @IBAction func fKeyPressed(_ sender: UIButton) {
-        let url = Bundle.main.url(forResource: "F", withExtension: "wav")
-        player = try! AVAudioPlayer(contentsOf: url!)
-        player?.play()
-    }
-    
-    @IBAction func gKeyPressed(_ sender: UIButton) {
-        let url = Bundle.main.url(forResource: "G", withExtension: "wav")
-        player = try! AVAudioPlayer(contentsOf: url!)
-        player?.play()
-    }
-    
-    @IBAction func aKeyPressed(_ sender: UIButton) {
-        let url = Bundle.main.url(forResource: "A", withExtension: "wav")
-        player = try! AVAudioPlayer(contentsOf: url!)
-        player?.play()
-    }
-    
-    @IBAction func bKeyPressed(_ sender: UIButton) {
-        let url = Bundle.main.url(forResource: "B", withExtension: "wav")
-        player = try! AVAudioPlayer(contentsOf: url!)
-        player?.play()
+    @IBAction func keyPressed(_ sender: UIButton) {
+        print(sender.currentTitle!)
+        soundAudio(sender.currentTitle!)
     }
 }
