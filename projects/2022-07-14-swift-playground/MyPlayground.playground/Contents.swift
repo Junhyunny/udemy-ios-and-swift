@@ -18,3 +18,31 @@ func greeting(name: String) {
 greeting(name: "Angela")
 greeting(name: "Junhyunny")
 
+func loveCalculator() {
+    let randomNumber = Int.random(in: 0...100)
+    if randomNumber > 80 {
+        print("You love each ohter like Kanye loves Kanye")
+    } else if randomNumber > 40 {
+        print("You go together like Coke and Mentos")
+    } else {
+        print("You will be forever alone")
+    }
+}
+
+func loveCalculatorSwitch() {
+    
+    let randomNumber = Int.random(in: 0...100)
+    
+    switch randomNumber {
+    case (80..<100):
+        print("You love each ohter like Kanye loves Kanye")
+    case (40..<80):
+        print("You go together like Coke and Mentos")
+    default:
+        print("You will be forever alone")
+    }
+}
+
+loveCalculator()
+
+loveCalculatorSwitch();
