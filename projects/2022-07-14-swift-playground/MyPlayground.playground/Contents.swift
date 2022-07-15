@@ -34,9 +34,9 @@ func loveCalculatorSwitch() {
     let randomNumber = Int.random(in: 0...100)
     
     switch randomNumber {
-    case (80..<100):
+    case (81..<100):
         print("You love each ohter like Kanye loves Kanye")
-    case (40..<80):
+    case (41...80):
         print("You go together like Coke and Mentos")
     default:
         print("You will be forever alone")
