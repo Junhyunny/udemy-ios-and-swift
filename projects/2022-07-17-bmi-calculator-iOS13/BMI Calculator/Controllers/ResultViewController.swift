@@ -18,9 +18,9 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bmiLabel.text = String(format: "%0.2f", bmi!.calculateBMI())
-        adviceLabel.text = bmi!.getAdvice()
-        resultBackground.backgroundColor = bmi!.getBackgroundColor()
+        bmiLabel.text = String(format: "%0.2f", bmi!.bmiValue)
+        adviceLabel.text = bmi!.advice
+        resultBackground.backgroundColor = bmi!.color
     }
     
     @IBAction func recalculatePressed(_ sender: UIButton) {

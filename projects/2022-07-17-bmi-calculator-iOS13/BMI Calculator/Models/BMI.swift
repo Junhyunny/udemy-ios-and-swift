@@ -13,9 +13,16 @@ struct BMI {
     var weight: Double
     var height: Double
     
+    var bmiValue: Double
+    var color: UIColor
+    var advice: String
+    
     init(weight: Double = 1.5, height: Double = 100) {
         self.weight = weight
         self.height = height
+        self.bmiValue = 0.0
+        self.color = UIColor.blue
+        self.advice = "Normal"
     }
     
     mutating func setWeight(weight: Double) {
@@ -34,23 +41,17 @@ struct BMI {
         return height
     }
     
-    func calculateBMI() -> Double {
-        return self.weight / pow(self.height, 2.0)
-    }
-    
-    func getAdvice() -> String {
-        let bmi = calculateBMI()
-        if bmi > 20 {
-            return "Nice"
+    mutating func calculateBMI() {
+        bmiValue = weight / pow(height, 2.0)
+        if bmiValue >= 25 {
+            advice = "Overweight"
+            color = UIColor.orange
+        } else if bmiValue >= 18.5 && bmiValue < 25 {
+            advice = "Normal"
+            color = UIColor.blue
+        } else {
+            advice = "Underweight"
+            color = UIColor.purple
         }
-        return "Very Good"
-    }
-    
-    func getBackgroundColor() -> UIColor {
-        let bmi = calculateBMI()
-        if bmi > 20 {
-            return UIColor.red
-        }
-        return UIColor.blue
     }
 }
