@@ -1,6 +1,6 @@
 import UIKit
 
-class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
+class WeatherViewController: UIViewController {
     
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -20,7 +20,10 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         searchTextField.endEditing(true)
         print(searchTextField.text!)
     }
-    
+}
+
+// MARK: - UITextFieldDelegate
+extension WeatherViewController: UITextFieldDelegate {
     // 키패드 go button 클릭시 동작하는 메소드, do not override
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
@@ -45,7 +48,10 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         }
         textField.text = ""
     }
-    
+}
+
+// MARK: - WeatherManagerDelegate
+extension WeatherViewController: WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         // dispatch logic to main thread asynchronously
         DispatchQueue.main.async {
