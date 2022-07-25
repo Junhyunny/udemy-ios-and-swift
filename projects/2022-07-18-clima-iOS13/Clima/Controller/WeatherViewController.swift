@@ -1,4 +1,5 @@
 import UIKit
+import CoreLocation
 
 class WeatherViewController: UIViewController {
     
@@ -8,17 +9,27 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     
     var weatherManager = WeatherManager()
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // UITextFieldDelegate 상속 후 searchTextField 객체의 delegate를 자기 자신으로 지정한다.
         searchTextField.delegate = self
         weatherManager.delagate = self
+        // User에게 권한을 요청한다.
+        // info 리스트에 권한이 필요한 이유를 작성한다.
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
     }
     
     @IBAction func pressSearch(_ sender: UIButton) {
         searchTextField.endEditing(true)
         print(searchTextField.text!)
+    }
+    
+    @IBAction func locationPressed(_ sender: UIButton) {
+        locationManager.requestLocation()
     }
 }
 
@@ -64,5 +75,22 @@ extension WeatherViewController: WeatherManagerDelegate {
     
     func didFailWithError(error: Error) {
         print(error)
+    }
+}
+
+// MARK: - CLLocationManagerDelegate
+extension WeatherViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            locationManager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            self.weatherManager.fecthWeather(latitude: lat, longitude: lon)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("hello world error")
     }
 }
