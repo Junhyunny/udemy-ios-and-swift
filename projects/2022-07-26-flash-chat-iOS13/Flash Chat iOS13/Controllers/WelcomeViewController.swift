@@ -9,14 +9,16 @@
 import UIKit
 
 class WelcomeViewController: UIViewController {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         titleLabel.text = ""
         var charaterIndex:Double = 0.0
-        let titleText = "⚡️FlashChat"
+        let titleText = Constants.appName
         for letter in titleText {
             charaterIndex += 0.2
             Timer.scheduledTimer(withTimeInterval: charaterIndex, repeats: false) { timer in

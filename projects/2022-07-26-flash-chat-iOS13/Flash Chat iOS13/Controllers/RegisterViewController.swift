@@ -7,12 +7,33 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterViewController: UIViewController {
-
+    
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     
     @IBAction func registerPressed(_ sender: UIButton) {
+        
+        if let email = emailTextfield.text,
+           let password = passwordTextfield.text {
+            
+            Auth.auth()
+                .createUser(withEmail: email, password: password) { (authResult, error) in
+                    if let err = error {
+                        print(err)
+                        return
+                    }
+                    // navigate to the chat
+                    self.performSegue(withIdentifier: Constants.registerSegue, sender: self)
+                }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "RegisterToChat" {
+            print("move to RegsiterToChat")
+        }
     }
 }
