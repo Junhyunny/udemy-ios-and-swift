@@ -11,21 +11,28 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusableCell" rowHeight="158" id="KGk-i7-Jjw" customClass="MessageCell" customModule="Flash_Chat_iOS13" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="351" height="158"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusableCell" rowHeight="188" id="KGk-i7-Jjw" customClass="MessageCell" customModule="Flash_Chat_iOS13" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="464" height="188"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="351" height="158"/>
+                <rect key="frame" x="0.0" y="0.0" width="464" height="188"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="F3N-n3-n5J">
-                        <rect key="frame" x="10" y="10" width="331" height="138"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="F3N-n3-n5J">
+                        <rect key="frame" x="10" y="10" width="444" height="168"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YouAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="3AV-AP-T1G">
+                                <rect key="frame" x="5" y="0.0" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="8fD-98-pn4"/>
+                                    <constraint firstAttribute="width" constant="40" id="vwp-EP-vmi"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edd-Py-a2w">
-                                <rect key="frame" x="10" y="10" width="261" height="118"/>
+                                <rect key="frame" x="55" y="0.0" width="334" height="158"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelaasdasdasdasdasdasdasdasdasdasdasdadasdasdasdsacscascacsaasdasdassdasdasdasdasd" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhD-Y7-Al0">
-                                        <rect key="frame" x="10" y="10" width="241" height="98"/>
+                                        <rect key="frame" x="10" y="10" width="314" height="138"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" systemColor="systemGray6Color"/>
                                         <nil key="highlightedColor"/>
@@ -33,14 +40,14 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemPurpleColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="qhD-Y7-Al0" secondAttribute="trailing" constant="10" id="1Rr-PV-NA8"/>
-                                    <constraint firstAttribute="bottom" secondItem="qhD-Y7-Al0" secondAttribute="bottom" constant="10" id="2m4-bA-dMu"/>
-                                    <constraint firstItem="qhD-Y7-Al0" firstAttribute="leading" secondItem="edd-Py-a2w" secondAttribute="leading" constant="10" id="Cp3-H1-shG"/>
-                                    <constraint firstItem="qhD-Y7-Al0" firstAttribute="top" secondItem="edd-Py-a2w" secondAttribute="top" constant="10" id="WAa-ex-n9M"/>
+                                    <constraint firstAttribute="bottom" secondItem="qhD-Y7-Al0" secondAttribute="bottom" constant="10" id="CZW-bu-XcH"/>
+                                    <constraint firstItem="qhD-Y7-Al0" firstAttribute="top" secondItem="edd-Py-a2w" secondAttribute="top" constant="10" id="OdB-OE-NNI"/>
+                                    <constraint firstItem="qhD-Y7-Al0" firstAttribute="leading" secondItem="edd-Py-a2w" secondAttribute="leading" constant="10" id="UGu-u2-Jkv"/>
+                                    <constraint firstAttribute="trailing" secondItem="qhD-Y7-Al0" secondAttribute="trailing" constant="10" id="tui-Ne-nGg"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MeAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="tOS-23-LRz">
-                                <rect key="frame" x="281" y="10" width="40" height="40"/>
+                                <rect key="frame" x="399" y="0.0" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="3nX-h1-aes"/>
                                     <constraint firstAttribute="height" constant="40" id="SdD-Fj-QB1"/>
@@ -48,37 +55,35 @@
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="edd-Py-a2w" firstAttribute="top" secondItem="F3N-n3-n5J" secondAttribute="top" constant="10" id="13C-xe-Dlf"/>
-                            <constraint firstAttribute="bottom" secondItem="edd-Py-a2w" secondAttribute="bottom" constant="10" id="2gf-LX-5Ie"/>
-                            <constraint firstItem="edd-Py-a2w" firstAttribute="top" secondItem="F3N-n3-n5J" secondAttribute="top" constant="10" id="5Wx-FY-FMs"/>
-                            <constraint firstItem="tOS-23-LRz" firstAttribute="leading" secondItem="edd-Py-a2w" secondAttribute="trailing" constant="10" id="6gL-ke-pfg"/>
-                            <constraint firstAttribute="trailing" secondItem="tOS-23-LRz" secondAttribute="trailing" constant="10" id="BwW-qs-MkP"/>
-                            <constraint firstAttribute="bottom" secondItem="edd-Py-a2w" secondAttribute="bottom" constant="10" id="OEX-Vx-Yhd"/>
-                            <constraint firstItem="edd-Py-a2w" firstAttribute="leading" secondItem="F3N-n3-n5J" secondAttribute="leading" constant="10" id="okd-DD-4AQ"/>
-                            <constraint firstItem="edd-Py-a2w" firstAttribute="leading" secondItem="F3N-n3-n5J" secondAttribute="leading" constant="10" id="sdM-Us-QOY"/>
-                            <constraint firstItem="tOS-23-LRz" firstAttribute="leading" secondItem="edd-Py-a2w" secondAttribute="trailing" constant="10" id="uRB-yE-UXJ"/>
-                            <constraint firstItem="tOS-23-LRz" firstAttribute="leading" secondItem="edd-Py-a2w" secondAttribute="trailing" id="z3d-5W-veP"/>
+                            <constraint firstItem="edd-Py-a2w" firstAttribute="leading" secondItem="3AV-AP-T1G" secondAttribute="trailing" constant="10" id="BMj-b4-j4o"/>
+                            <constraint firstAttribute="bottom" secondItem="edd-Py-a2w" secondAttribute="bottom" constant="10" id="EMf-nB-UUN"/>
+                            <constraint firstItem="3AV-AP-T1G" firstAttribute="leading" secondItem="F3N-n3-n5J" secondAttribute="leading" constant="5" id="XYt-eC-Wmf"/>
+                            <constraint firstAttribute="trailing" secondItem="tOS-23-LRz" secondAttribute="trailing" constant="5" id="b4y-CI-etO"/>
+                            <constraint firstItem="tOS-23-LRz" firstAttribute="leading" secondItem="edd-Py-a2w" secondAttribute="trailing" constant="10" id="bF0-MY-6gf"/>
+                            <constraint firstItem="edd-Py-a2w" firstAttribute="top" secondItem="F3N-n3-n5J" secondAttribute="top" constant="10" id="wZ9-vb-gpw"/>
                         </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="F3N-n3-n5J" secondAttribute="bottom" constant="10" id="04w-aY-aNQ"/>
-                    <constraint firstAttribute="trailing" secondItem="F3N-n3-n5J" secondAttribute="trailing" constant="10" id="f4k-Nd-koO"/>
-                    <constraint firstItem="F3N-n3-n5J" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="gOp-sv-gUm"/>
-                    <constraint firstItem="F3N-n3-n5J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="oDp-qM-kft"/>
+                    <constraint firstItem="F3N-n3-n5J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="76D-TG-ZGa"/>
+                    <constraint firstAttribute="bottom" secondItem="F3N-n3-n5J" secondAttribute="bottom" constant="10" id="Jjj-8O-Wc5"/>
+                    <constraint firstItem="F3N-n3-n5J" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="dBm-ue-Oq0"/>
+                    <constraint firstAttribute="trailing" secondItem="F3N-n3-n5J" secondAttribute="trailing" constant="10" id="pVN-mZ-6Df"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="label" destination="qhD-Y7-Al0" id="mCh-9u-hv6"/>
-                <outlet property="messageBubble" destination="qhD-Y7-Al0" id="1Kb-jX-mqO"/>
+                <outlet property="leftImageView" destination="3AV-AP-T1G" id="6Gh-oT-iNR"/>
+                <outlet property="messageBubble" destination="edd-Py-a2w" id="2Zb-tu-adV"/>
                 <outlet property="rightImageView" destination="tOS-23-LRz" id="uiO-9E-HEy"/>
             </connections>
-            <point key="canvasLocation" x="187.68115942028987" y="97.098214285714278"/>
+            <point key="canvasLocation" x="181.15942028985509" y="109.82142857142857"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="MeAvatar" width="36" height="36"/>
+        <image name="YouAvatar" width="36" height="36"/>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
