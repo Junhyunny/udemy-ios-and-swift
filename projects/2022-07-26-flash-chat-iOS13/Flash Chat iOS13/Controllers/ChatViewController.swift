@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 
 class ChatViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextfield: UITextField!
     
@@ -25,7 +25,14 @@ class ChatViewController: UIViewController {
         title = Constants.appName
         // 뒤로가기 버튼 delete
         navigationItem.hidesBackButton = true
+        
         tableView.dataSource = self
+        tableView.delegate = self
+        
+        // 프로그래밍으로 메세지 셀 등록
+        tableView.register(
+            UINib(nibName: Constants.cellNibName, bundle: nil), forCellReuseIdentifier: Constants.cellIdentifier
+        )
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
@@ -50,8 +57,14 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath)
-        cell.textLabel?.text = "This is a cell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as! MessageCell
+        cell.label.text = messages[indexPath.row].body
         return cell
+    }
+}
+
+extension ChatViewController:UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
     }
 }
