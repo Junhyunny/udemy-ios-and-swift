@@ -11,7 +11,7 @@ import UIKit
 import RealmSwift
 import SwipeCellKit
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController: SwiperTableViewController {
     
     let realm = try! Realm()
     
@@ -54,6 +54,20 @@ class CategoryViewController: UITableViewController {
         //            print(error)
         //        }
         categories = realm.objects(RealmCategory.self)
+    }
+    
+    override func deleteCell(indexPath: IndexPath) {
+        if let category = self.categories?[indexPath.row] {
+            do {
+                try self.realm.write({
+                    self.realm.delete(category)
+                })
+            } catch {
+                print(error)
+            }
+            // self.loadCategories()
+            self.tableView.reloadData()
+        }
     }
     
     //MARK: - Add New Categories
@@ -109,29 +123,5 @@ class CategoryViewController: UITableViewController {
                 controller.selectedCategory = categories?[indexPath.row]
             }
         }
-    }
-}
-
-extension CategoryViewController: SwipeTableViewCellDelegate {
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        // from the right
-        guard orientation == .right else {
-            return nil
-        }
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { swipeAction, indexPath in
-            if let category = self.categories?[indexPath.row] {
-                do {
-                    try self.realm.write({
-                        self.realm.delete(category)
-                    })
-                } catch {
-                    print(error)
-                }
-                // self.loadCategories()
-                self.tableView.reloadData()
-            }
-        }
-        return [deleteAction]
     }
 }

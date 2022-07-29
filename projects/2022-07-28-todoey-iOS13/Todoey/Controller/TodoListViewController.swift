@@ -9,15 +9,15 @@
 import UIKit
 //import CoreData
 import RealmSwift
+import SwipeCellKit
 
-class TodoListViewController: UITableViewController {
+class TodoListViewController: SwiperTableViewController {
     
     var selectedCategory: RealmCategory?  {
         didSet {
             loadItems()
         }
     }
-    
     
     // var items: [Item] = []
     var items: Results<RealmItem>?
@@ -114,6 +114,20 @@ class TodoListViewController: UITableViewController {
         //            }
     }
     
+    override func deleteCell(indexPath: IndexPath) {
+        if let item = self.items?[indexPath.row] {
+            do {
+                try self.realm.write({
+                    self.realm.delete(item)
+                })
+            } catch {
+                print(error)
+            }
+            // self.loadCategories()
+            self.tableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(dataFilePath!)
@@ -147,7 +161,8 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 셀을 재사용하면서 셀의 속성을 같이 사용하는 경우가 발생한다.
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath) as! SwipeTableViewCell
+        cell.delegate = self
         //        let item = items[indexPath.row]
         //        cell.textLabel?.text = item.title
         //        cell.accessoryType = item.done ? .checkmark : .none
