@@ -10,6 +10,7 @@ import UIKit
 //import CoreData
 import RealmSwift
 import SwipeCellKit
+import ChameleonFramework
 
 class CategoryViewController: SwiperTableViewController {
     
@@ -25,6 +26,7 @@ class CategoryViewController: SwiperTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCategories()
+        tableView.separatorStyle = .none
     }
     
     //MARK: - Data Manipulation Methods
@@ -82,6 +84,7 @@ class CategoryViewController: SwiperTableViewController {
                 // let category = Category(context: self.context)
                 let category = RealmCategory()
                 category.name = text
+                category.hexColor = UIColor.randomFlat().hexValue()
                 // self.categories.append(category)
                 // self.saveCategories()
                 self.saveCategory(category: category)
@@ -105,7 +108,12 @@ class CategoryViewController: SwiperTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! SwipeTableViewCell
         cell.delegate = self
-        cell.textLabel?.text = categories?[indexPath.row].name ?? "Not category added yet"
+        if let category = categories?[indexPath.row] {
+            cell.textLabel?.text = category.name
+            cell.backgroundColor = UIColor(hexString: category.hexColor)
+        } else {
+            cell.textLabel?.text = "Not category added yet"
+        }
         return cell
     }
     
