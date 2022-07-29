@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // 데이터가 쌓이는 경로 확인하기
         print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as String)
+        // realm database location
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        do {
+            let realm = try Realm()
+            try realm.write {
+//                let data = Data()
+//                data.name = "Junhyunny"
+//                data.age = 31
+//                realm.add(data)
+            }
+        } catch {
+            print("Error Realm \(error)")
+        }
+        
         return true
     }
     
