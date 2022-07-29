@@ -11,6 +11,12 @@ import CoreData
 
 class TodoListViewController: UITableViewController {
     
+    var selectedCategory: Category?  {
+        didSet {
+            loadItems()
+        }
+    }
+    
     var items: [Item] = []
     
     let defaults = UserDefaults.standard
@@ -61,12 +67,17 @@ class TodoListViewController: UITableViewController {
         
         // fetch all items
         let request: NSFetchRequest<Item> = Item.fetchRequest()
-        if let safePredicate = predicate {
-            request.predicate = safePredicate
-        }
+        
         if let safeSorter = sorter {
             request.sortDescriptors = [safeSorter]
         }
+        
+        var predicates: [NSPredicate] = [NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)]
+        if let safePredicate = predicate {
+            predicates.append(safePredicate)
+        }
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        
         do {
             items = try context.fetch(request)
         } catch {
@@ -145,9 +156,12 @@ class TodoListViewController: UITableViewController {
             // what will happen once the user clicks the add item on our UIAlert
             uiAction in
             if let text = textField?.text {
+                
                 let item = Item(context: self.context)
                 item.title = text
                 item.done = false
+                item.parentCategory = self.selectedCategory
+                
                 self.items.append(item)
                 self.tableView.reloadData()
                 

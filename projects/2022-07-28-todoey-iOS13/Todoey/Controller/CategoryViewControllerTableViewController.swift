@@ -11,6 +11,7 @@ import CoreData
 
 class CategoryViewController: UITableViewController {
     
+    // var selectedCategory: Category?
     var categories: [Category] = []
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -39,7 +40,6 @@ class CategoryViewController: UITableViewController {
     }
     
     //MARK: - Add New Categories
-
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField: UITextField?
         
@@ -78,6 +78,16 @@ class CategoryViewController: UITableViewController {
     //MARK: - TableView Delegate Method
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("select \(indexPath.row) category")
+        // selectedCategory = categories[indexPath.row]
         performSegue(withIdentifier: "goToItems", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToItems" {
+            let controller = segue.destination as! TodoListViewController
+            if let indexPath = tableView.indexPathForSelectedRow {
+                controller.selectedCategory = categories[indexPath.row]
+            }
+        }
     }
 }
