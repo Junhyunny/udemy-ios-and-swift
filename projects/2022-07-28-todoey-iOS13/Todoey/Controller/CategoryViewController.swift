@@ -9,6 +9,7 @@
 import UIKit
 //import CoreData
 import RealmSwift
+import SwipeCellKit
 
 class CategoryViewController: UITableViewController {
     
@@ -88,7 +89,8 @@ class CategoryViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! SwipeTableViewCell
+        cell.delegate = self
         cell.textLabel?.text = categories?[indexPath.row].name ?? "Not category added yet"
         return cell
     }
@@ -107,5 +109,29 @@ class CategoryViewController: UITableViewController {
                 controller.selectedCategory = categories?[indexPath.row]
             }
         }
+    }
+}
+
+extension CategoryViewController: SwipeTableViewCellDelegate {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        // from the right
+        guard orientation == .right else {
+            return nil
+        }
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { swipeAction, indexPath in
+            if let category = self.categories?[indexPath.row] {
+                do {
+                    try self.realm.write({
+                        self.realm.delete(category)
+                    })
+                } catch {
+                    print(error)
+                }
+                // self.loadCategories()
+                self.tableView.reloadData()
+            }
+        }
+        return [deleteAction]
     }
 }
