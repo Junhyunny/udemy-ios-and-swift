@@ -10,6 +10,7 @@ import UIKit
 //import CoreData
 import RealmSwift
 import SwipeCellKit
+import ChameleonFramework
 
 class TodoListViewController: SwiperTableViewController {
     
@@ -18,6 +19,8 @@ class TodoListViewController: SwiperTableViewController {
             loadItems()
         }
     }
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     // var items: [Item] = []
     var items: Results<RealmItem>?
@@ -135,19 +138,55 @@ class TodoListViewController: SwiperTableViewController {
         // Codable
         loadItems()
         
+        
         // mine
         // if let jsonArray = defaults.data(forKey: "TodoList") {
         //     items = decodeItems(dataArray: jsonArray)
         // }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(#function)
+        if let hexColor = selectedCategory?.hexColor {
+            guard let navBar = navigationController?.navigationBar else {
+                fatalError("Navigation Controller does not exists")
+            }
+            print(navBar, hexColor)
+            let color = UIColor(hexString: hexColor)!
+            
+            title = selectedCategory!.name
+            // barTintColor, backgroundColor, tintColor 차이점 잘 모르겠음 찾아서 정리하기
+            searchBar.backgroundColor = color
+            searchBar.barTintColor = color
+            navBar.tintColor = ContrastColorOf(color, returnFlat: true)
+            navBar.backgroundColor = color
+            // 안먹음 /.7 세대 아이폰
+            navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(color, returnFlat: true)]
+            // 먹음 7 세대 아이폰
+            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(color, returnFlat: true)]
+        }
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         print(#function)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         // it doesnt call
         super.viewWillDisappear(animated)
+        print(#function)
+        
+        guard let navBar = navigationController?.navigationBar else {
+            fatalError("Navigation Controller does not exists")
+        }
+        navBar.tintColor = .none
+        navBar.backgroundColor = .none
+        // 테마에 따른 시스템 라벨 색상
+        navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+        navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+        
         // mine
         //        if let jsonItems = encodeItems(itemArray: self.items) {
         //            self.defaults.set(jsonItems, forKey: "TodoList")
@@ -169,6 +208,10 @@ class TodoListViewController: SwiperTableViewController {
         if let item = items?[indexPath.row] {
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done ? .checkmark : .none
+            let backgroundColor = UIColor(hexString: selectedCategory!.hexColor)!.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(items!.count))!
+            let fontColor = ContrastColorOf(backgroundColor, returnFlat: true)
+            cell.backgroundColor = backgroundColor
+            cell.textLabel?.textColor = fontColor
         } else {
             cell.textLabel?.text = "Not added item yet"
         }
@@ -233,7 +276,7 @@ class TodoListViewController: SwiperTableViewController {
                         print(error)
                     }
                 }
-
+                
                 self.tableView.reloadData()
                 
                 // codable, database
@@ -259,11 +302,11 @@ class TodoListViewController: SwiperTableViewController {
 extension TodoListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        var predicate: NSPredicate? = nil
-//        var sorter: NSSortDescriptor? = nil
+        //        var predicate: NSPredicate? = nil
+        //        var sorter: NSSortDescriptor? = nil
         if let text = searchBar.text {
-//            predicate = NSPredicate(format: "title CONTAINS[cd] %@", text)
-//            sorter = NSSortDescriptor(key: "title", ascending: true)
+            //            predicate = NSPredicate(format: "title CONTAINS[cd] %@", text)
+            //            sorter = NSSortDescriptor(key: "title", ascending: true)
             items = items?.filter("title CONTAINS[cd] %@", text).sorted(byKeyPath: "createdAt", ascending: true)
         }
         // loadItems(where: predicate, orderBy: sorter)
