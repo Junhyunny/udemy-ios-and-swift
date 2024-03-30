@@ -5,3 +5,5 @@
   - 이론에 관련된 내용 정리
 - examples
   - 예제 코드
+- resources
+  - <https://www.appbrewery.co/p/ios-course-resources/>
