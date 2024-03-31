@@ -2,7 +2,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private final let diceArray: Array = [
+    private final let diceArray: [UIImage] = [
         UIImage(imageLiteralResourceName: "DiceOne"),
         UIImage(imageLiteralResourceName: "DiceTwo"),
         UIImage(imageLiteralResourceName: "DiceThree"),
@@ -17,9 +17,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var diceImageViewThree: UIImageView!
     @IBOutlet weak var rollButton: UIButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    // View 로드 후 별도 작업이 없다면 viewDidLoad 메소드 호출 생략이 가능하다.
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//    }
     
     deinit {
         print("ViewController is being deinitialized")
